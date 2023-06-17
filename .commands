@@ -1,0 +1,38 @@
+export DISABLE_AUTO_TITLE="true"
+
+# $1 = type; 0 - both, 1 - tab, 2 - title
+# rest = text
+set_text () {
+    # echo works in bash & zsh
+    local mode=$1 ; shift
+    echo -ne "\033]$mode;$@\007"
+}
+title () { set_text 0 $@; }
+nt () {
+    if [[ -z "$@" ]]; then
+        set_text 1 $(basename "$PWD")
+    else
+        set_text 1 $@
+    fi
+}
+nw () { set_text 2 $@; }
+
+h() {
+  if [[ -z "$@" ]]; then
+    history
+  else
+    history | grep --color "$@"
+  fi
+}
+
+she() { vim ~/.zshrc }
+
+shs() { source ~/.zshrc }
+
+cme() { vim ~/.commands }
+
+cms() { source ~/.commands }
+
+path() { tr : '\n' <<< $PATH }
+
+eg() { env | grep "$@" }
