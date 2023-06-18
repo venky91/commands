@@ -36,3 +36,5 @@ cms() { source ~/.commands }
 path() { tr : '\n' <<< $PATH }
 
 eg() { env | grep "$@" }
+
+alias hag="history | ag $1"
